@@ -5,9 +5,12 @@ pin = []
 s = ''
 first=True
 second=False
+domainTopic = "test12367"
+keypadTopic = "keypad"
+pinTopic = "pin"
 
 def on_connect(client, userdata, flags, rc):
-    client.subscribe("test12367/keypad")
+    client.subscribe(domainTopic +"/" +keypadTopic)
 
 def on_message(client, userdata, msg):
     global first
@@ -29,7 +32,7 @@ def on_message(client, userdata, msg):
     if msg.payload in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
         pin.append(msg.payload)
         if int(s.join((pin)))  > 999:
-            client.publish("test12367/pin", s.join(map(str, pin)))
+            client.publish(domainTopic +"/" +pinTopic, s.join(map(str, pin)))
             del pin[0]
 client = mqtt.Client()
 client.on_connect = on_connect
