@@ -1,3 +1,6 @@
+# python script to convert single keypress number getting from mqtt to a 4-digit pin
+
+
 import paho.mqtt.client as mqtt
 import time
 
